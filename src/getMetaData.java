@@ -3,20 +3,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public class getMetaData {
 
     public static MetaData fromFile(String directory) throws IOException {
-        MetaData result = filterInputList(FileRW.read(directory));
-
-        return result;
+        return filterInputList(Objects.requireNonNull(FileRW.read(directory)));
     }
 
     private static MetaData filterInputList (List<String> inputList) {
         MetaData result = new MetaData();
         Iterator<String> inputListIterator = inputList.iterator();
 
-        while (hasAllMetaData(result) == false && inputListIterator.hasNext()) {
+        while (!hasAllMetaData(result) && inputListIterator.hasNext()) {
             String line = inputListIterator.next();
 
             if (Regex.match(line, Regex.regexForReferenceLongitude)) {
