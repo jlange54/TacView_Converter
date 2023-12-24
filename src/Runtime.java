@@ -1,11 +1,9 @@
 public class Runtime {
 
     private static long startTime;
-    private static long endTime;
 
     public static long currentTime () {
-        long unixTime = System.currentTimeMillis();
-        return unixTime;
+        return System.currentTimeMillis();
     }
 
     public static void start () {
@@ -13,22 +11,21 @@ public class Runtime {
     }
 
     public static long end (timeUnit timeUnit) {
-        endTime = currentTime();
+        long endTime = currentTime();
         long duration = endTime - startTime;
 
         switch (timeUnit) {
-            case ms:
-                return duration;
             case seconds:
                 return duration/1000L;
             case minutes:
                 return duration/60000L;
+            case ms:
             default:
                 return duration;
         }
     }
 
-    enum timeUnit {
+    public enum timeUnit {
         ms, seconds, minutes
     }
 }
