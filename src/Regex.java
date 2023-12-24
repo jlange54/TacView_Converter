@@ -22,9 +22,6 @@ public class Regex {
     public static boolean match (String line, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(line);
-        if (matcher.find()){
-            return true;
-        }
-        return false;
+        return matcher.find();
     }
 }
