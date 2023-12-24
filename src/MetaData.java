@@ -1,8 +1,6 @@
 import java.time.LocalDateTime;
-import java.util.Objects;
-import java.util.stream.Stream;
 
-public class MetaInfo {
+public class MetaData {
 
     private int referenceLongitude = -1000;
     private int referenceLatitude = -1000;

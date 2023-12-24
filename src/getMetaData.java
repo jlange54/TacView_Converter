@@ -3,22 +3,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Stream;
 
-public class getMetaInfo {
+public class getMetaData {
 
-    public static MetaInfo fromFile(String directory) throws IOException {
-        MetaInfo result = filterInputList(FileRW.read(directory));
+    public static MetaData fromFile(String directory) throws IOException {
+        MetaData result = filterInputList(FileRW.read(directory));
 
         return result;
     }
 
-    private static MetaInfo filterInputList (List<String> inputList) {
-        MetaInfo result = new MetaInfo();
+    private static MetaData filterInputList (List<String> inputList) {
+        MetaData result = new MetaData();
         Iterator<String> inputListIterator = inputList.iterator();
 
-        while (hasAllMetaInfo(result) == false && inputListIterator.hasNext()) {
+        while (hasAllMetaData(result) == false && inputListIterator.hasNext()) {
             String line = inputListIterator.next();
 
             if (Regex.match(line, Regex.regexForReferenceLongitude)) {
@@ -41,21 +39,21 @@ public class getMetaInfo {
         return result;
     }
 
-    private static boolean hasAllMetaInfo (MetaInfo metaInfo) {
-       boolean hasAllMetaInfo = false;
+    private static boolean hasAllMetaData (MetaData metaData) {
+       boolean hasAllMetaData = false;
 
        if (
-               metaInfo.getReferenceLongitude() != -1000 &&
-               metaInfo.getReferenceLatitude() != -1000 &&
-               metaInfo.getReferenceTime() != null &&
-               metaInfo.getRecordingTime() != null &&
-               metaInfo.getTitle() != null &&
-               metaInfo.getDataSource() != null &&
-               metaInfo.getAuthor() != null
+               metaData.getReferenceLongitude() != -1000 &&
+               metaData.getReferenceLatitude() != -1000 &&
+               metaData.getReferenceTime() != null &&
+               metaData.getRecordingTime() != null &&
+               metaData.getTitle() != null &&
+               metaData.getDataSource() != null &&
+               metaData.getAuthor() != null
        ) {
-           hasAllMetaInfo = true;
+           hasAllMetaData = true;
        }
 
-       return hasAllMetaInfo;
+       return hasAllMetaData;
     }
 }
